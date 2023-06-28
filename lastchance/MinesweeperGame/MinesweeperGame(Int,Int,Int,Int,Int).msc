@@ -1,0 +1,12 @@
+@using lastchance
+
+@var this.boardSize = boardSize
+@var this.numMines = numMines
+@var this.board = make2dCellList(boardSize, boardSize)
+@var this.gameOver = false
+@var this.gameWon = false
+@var this.x = x
+@var this.y = y
+@var this.z = z
+@var this.placeMines()
+@var this.calculateAdjacentMines()

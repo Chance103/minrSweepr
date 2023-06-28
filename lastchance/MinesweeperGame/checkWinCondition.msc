@@ -1,0 +1,11 @@
+@using lastchance
+
+@for Int row in list::range(0, this.boardSize)
+    @for Int col in list::range(0, this.boardSize)
+        @define Cell cell = get2dCellList(this.board, this.boardSize, this.boardSize, row, col)
+        @if !cell.isMine() && !cell.isRevealed()
+            @return false
+        @fi
+    @done
+@done
+@return true

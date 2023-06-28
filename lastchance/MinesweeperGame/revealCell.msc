@@ -1,0 +1,53 @@
+@using lastchance
+
+@if player.getItemInMainHand().getItemType().toLowerCase() == "stick" && player.getTargetBlock(120).getBlockType().toLowerCase() == "white_concrete"
+    @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;426208337,1829258249,-1296936823,1782922722],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2ZlMWQyMjJlYjFhMzVkNzMzZmJkZTdjMTM0MmVmYTgyMTg5OGI1NmM3YzI4YTY5YjY4Nzg5MjBiNTExIn19fQ=="}]}}}
+@elseif player.getItemInMainHand().getItemType().toLowerCase() == "stick" && player.getTargetBlock(120).getBlockType().toLowerCase() == "player_wall_head"
+    @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z}} white_concrete
+@else
+    @if row < 0 || row >= this.boardSize || col < 0 || col >= this.boardSize
+        @return
+    @fi
+
+    @define Cell cell = get2dCellList(this.board, this.boardSize, this.boardSize, row, col)
+
+    @if cell.isRevealed()
+        @return
+    @fi
+
+    @var cell.setRevealed(true)
+    @bypass setblock {{col+this.x}} {{row+this.y}} {{this.z}} air
+    @if cell.adjacentMines == 1
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDliMzAzMDNmOTRlN2M3ODVhMzFlNTcyN2E5MzgxNTM1ZGFmNDc1MzQ0OWVhNDFkYjc0NmUxMjM0ZTlkZDJiNSJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 2
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNjYTdkN2MxNTM0ZGM2YjllZDE2NDdmOTAyNWRkZjI0NGUwMTA3ZGM4ZGQ0ZjRmMDg1MmM4MjA4MWQ2MzUwZSJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 3
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTk1ZTFlMmZiMmRlN2U2Mjk5YTBmNjFkZGY3ZDlhNmQxMDFmOGQ2NjRmMTk1OWQzYjY3ZGNlOGIwNDlhOGFlMSJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 4
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzgzOWVhZjllZTA3NjcwNjA3ZDNkYTRkNmMxZDMwZmU1OWRiNTY0NThmYWQ1ZjU1YjU0MTJkNTZiM2RlYjU1OSJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 5
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTgxNDBlYzQ4NDU2MzFhODlmZmU4MzQ0YWU5OGQxMDQ5YjgyYzIxNTkzOTMyOTBiZDM4YThhMDA4NDY1YjNkOSJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 6
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGViZjliNmE2YzRlYjBjYmZkMGEzZDM3YzM0YzQ1ODYwNjgxZjEzZjcyNzBmMTMzN2ZkMTM2YTcwMTE4OThmMCJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 7
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRjMmQ2Y2JkZmYwMGI5N2FmN2Y4Y2ZlODc2N2ZkODdjZDY1NjM5YWJkZjgzZWMxMDM5YTQ2NDE1ZTY5ZTM5OCJ9fX0="}]}}}
+    @elseif cell.adjacentMines == 8
+        @bypass setblock {{this.x+col}} {{this.y+row}} {{this.z+1}} minecraft:player_wall_head[facing=north]{SkullOwner:{Id:[I;153098370,-202816921,-1361315423,-533135202],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQyNzkxNzUyZjY3YTY0NTBiOTc1ZDM1NzQxMjM1NmIwYTk5ZTM1NTVlNjdlYmRhZDJkNDAzMjYxMjliZGRhNCJ9fX0="}]}}}
+    @fi
+        
+    @if cell.isMine()
+        @var this.gameOver = true
+        @player Game over! You clicked on a mine.
+    @elseif cell.getAdjacentMines() == 0
+        @for Int i in list::range(-1, 2)
+            @for Int j in list::range(-1, 2)
+                @var this.revealCell(row+i, col+j, player)
+            @done
+        @done
+    @fi
+
+    @if this.checkWinCondition()
+        @var this.gameWon = true
+        @player Congratulations! You've won the game.
+    @fi
+@fi

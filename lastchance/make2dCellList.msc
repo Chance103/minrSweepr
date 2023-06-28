@@ -1,0 +1,9 @@
+@using lastchance
+
+@define Cell[] cellList = Cell[]
+
+@for Int i in list::range(0, rows*cols)
+    @var cellList.append(Cell(false, false, 0))
+@done
+
+@return cellList

@@ -1,0 +1,15 @@
+@using lastchance
+@fast
+
+@define Int size = size1
+@define Int mines = mines1
+@define Int x = -1571
+@define Int y = 105
+@define Int z = 1341
+
+@bypass fill {{x}} {{y}} {{z}} {{x+size-1}} {{y+size-1}} {{z+1}} air
+@bypass fill {{x}} {{y}} {{z}} {{x+size-1}} {{size+y-1}} {{z}} white_concrete
+@bypass fill {{x}} {{y}} {{z+1}} {{x+size-1}} {{size+y-1}} {{z+1}} light_gray_concrete
+
+@var game1 = MinesweeperGame(size, mines, x, y, z)
+@var player1 = player

@@ -1,0 +1,29 @@
+@using lastchance
+
+@define String tmp
+
+@player How big do you want it to be? (NxN) (min 1 max 20)
+@player N=
+@prompt 10s tmp Prompt expired
+
+@if Int(tmp) < 1 || Int(tmp) > 20
+    @player number out of range. Aborting
+    @return
+@fi
+
+@var size1 = Int(tmp)
+@player size1 set!
+
+@player How many mines?
+@player mines=
+@prompt 10s tmp Prompt expired
+
+@if Int(tmp) < 0 || Int(tmp) > size1 * size1
+    @player number out of range. Aborting
+    @return
+@fi
+
+@var mines1 = Int(tmp)
+@player mines1 set!
+
+@bypass fill {{game1.x}} {{game1.y}} {{game1.z}} {{game1.x+19}} {{game1.y+19}} {{game1.z+1}} air

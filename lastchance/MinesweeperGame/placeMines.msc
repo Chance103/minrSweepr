@@ -1,0 +1,31 @@
+@using lastchance
+@fast
+
+@define Int minesPlaced = 0
+
+@for Int i in list::range(0, 10000)
+
+    @if minesPlaced == this.numMines
+        @return
+    @fi
+
+    @define Int row = math::randomInt()
+    @define Int col = math::randomInt()
+
+    @if row < 0
+        @var row = (row + 1) * -1
+    @fi
+
+    @if col < 0
+        @var col = (col + 1) * -1
+    @fi
+
+    @var row %= this.boardSize
+    @var col %= this.boardSize
+
+    @if !get2dCellList(this.board, this.boardSize, this.boardSize, row, col).isMine()
+        @var get2dCellList(this.board, this.boardSize, this.boardSize, row, col).setMine(true)
+        @var minesPlaced += 1
+    @fi
+    
+@done

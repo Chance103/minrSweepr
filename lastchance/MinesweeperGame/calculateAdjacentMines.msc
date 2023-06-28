@@ -1,0 +1,26 @@
+@using lastchance
+@fast
+
+@for Int row in list::range(0, this.boardSize)
+    @for Int col in list::range(0, this.boardSize)
+        @define Cell cell = get2dCellList(this.board, this.boardSize, this.boardSize, row, col)
+
+        @if !cell.isMine()
+            @define Int count = 0
+
+            @for Int i in list::range(-1, 2)
+                @for Int j in list::range(-1, 2)
+                    @define Int newRow = row + i
+                    @define Int newCol = col + j
+
+                    @if newRow >= 0 && newRow < this.boardSize && newCol >= 0 && newCol < this.boardSize && get2dCellList(this.board, this.boardSize, this.boardSize, newRow, newCol).isMine()
+                        @var count += 1
+                    @fi
+                @done
+            @done 
+
+            @var cell.setAdjacentMines(count)
+            
+        @fi
+    @done
+@done

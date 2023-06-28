@@ -1,0 +1,39 @@
+@namespace lastchance
+    MinesweeperGame game1
+    Player player1
+    Int mines1
+    Int size1
+    @class MinesweeperGame
+        Int x
+        Int y
+        Int z
+        Int boardSize
+        Int numMines
+        lastchance::Cell[] board
+        Boolean gameOver
+        Boolean gameWon
+
+        MinesweeperGame(Int boardSize, Int numMines, Int x, Int y, Int z)
+        placeMines()
+        calculateAdjacentMines()
+        revealCell(Int row, Int col, Player player)
+        Boolean checkWinCondition()
+    @endclass
+
+    @class Cell
+        Boolean isMine
+        Boolean isRevealed
+        Int adjacentMines
+
+        Cell(Boolean isMine, Boolean isRevealed, Int adjacentMines)
+        Boolean isMine()
+        setMine(Boolean mine)
+        Boolean isRevealed()
+        setRevealed(Boolean revealed)
+        Int getAdjacentMines()
+        setAdjacentMines(Int adjacentMines)
+    @endclass
+
+    lastchance::Cell[] make2dCellList(Int rows, Int cols)
+    lastchance::Cell get2dCellList(Cell[] lst, Int rows, Int cols, Int row, Int col)
+@endnamespace

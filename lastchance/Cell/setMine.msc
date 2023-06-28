@@ -1,0 +1,3 @@
+@using lastchance
+
+@var this.isMine = mine
